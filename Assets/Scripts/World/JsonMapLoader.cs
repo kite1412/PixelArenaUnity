@@ -22,8 +22,9 @@ public class JsonMapLoader : MonoBehaviour
     [Header("Tilemap")]
     [SerializeField] private Tilemap tilemap;
 
-    [Header("Camera Bounds")]
+    [Header("Bounds")]
     [SerializeField] private CameraBoundsController cameraBoundsController;
+    [SerializeField] private WorldBoundsController worldBoundsController;
 
     void Start()
     {
@@ -52,5 +53,6 @@ public class JsonMapLoader : MonoBehaviour
         }
         
         cameraBoundsController.UpdateBounds();
+        worldBoundsController.UpdateBounds();
     }
 }
