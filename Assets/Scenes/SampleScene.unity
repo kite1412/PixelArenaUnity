@@ -238,6 +238,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1373009949801600957, guid: 645a0d98580444ec4ab1211b88353220, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5562222433849545797, guid: 645a0d98580444ec4ab1211b88353220, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.899127
@@ -596,8 +600,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JsonMapLoader
   mapJson: {fileID: 4900000, guid: ae413213e415f48d29bd4e79913bb7f8, type: 3}
-  tileSprites: []
-  tilemap: {fileID: 0}
+  tileSprites:
+  - {fileID: -5614760582138021231, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 1073888608, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 741664739, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -1945922929, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 629086458, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -3476750, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 626816895, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 47510561, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 2041352238, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 1594361929, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -300673056, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 2126770934, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -1203087807, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 1204725885, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -1737954359, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -302781162, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 1110581527, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -1637175490, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -170140757, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: 1405232618, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  - {fileID: -1188191270, guid: d3683bac451b34098b0c5f25e2118cde, type: 3}
+  tilemap: {fileID: 1735501063}
 --- !u!4 &1004498542
 Transform:
   m_ObjectHideFlags: 0
