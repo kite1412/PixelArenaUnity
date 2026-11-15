@@ -13,7 +13,7 @@ public class MapData
     public int IdOffset => id_offset;
 }
 
-public class JsonMapLoader : MonoBehaviour
+public class JsonTilemapLoader : MonoBehaviour
 {
     [Header("Map Json")]
     [SerializeField] private TextAsset mapJson;
@@ -22,16 +22,10 @@ public class JsonMapLoader : MonoBehaviour
     [Header("Tilemap")]
     [SerializeField] private Tilemap tilemap;
 
-    [Header("Bounds")]
-    [SerializeField] private CameraBoundsController cameraBoundsController;
-    [SerializeField] private WorldBoundsController worldBoundsController;
+    [Header("Tileset Metadata")]
+    [SerializeField] private JsonTilesetMetadataLoader tilesetMetadataLoader;
 
-    void Start()
-    {
-        GenerateMap();
-    }
-
-    private void GenerateMap()
+    public void GenerateMap()
     {
         MapData mapData = JsonUtility.FromJson<MapData>(mapJson.text);
 
@@ -51,8 +45,5 @@ public class JsonMapLoader : MonoBehaviour
                 }
             }
         }
-        
-        cameraBoundsController.UpdateBounds();
-        worldBoundsController.UpdateBounds();
     }
 }

@@ -1,0 +1,95 @@
+{
+    "tile_size": 32,
+    "total_column": 4,
+    "total_row": 6,
+    "tiles": [
+        {
+            "id": 0,
+            "is_solid": false
+        },
+        {
+            "id": 1,
+            "is_solid": false,
+            "base_tile_id": 0
+        },
+        {
+            "id": 2,
+            "is_solid": false,
+            "base_tile_id": 0
+        },
+        {
+            "id": 3,
+            "is_solid": true,
+            "base_tile_id": 0
+        },
+        {
+            "id": 4,
+            "is_solid": false
+        },
+        {
+            "id": 5,
+            "is_solid": false
+        },
+        {
+            "id": 6,
+            "is_solid": false
+        },
+        {
+            "id": 7,
+            "is_solid": true,
+            "base_tile_id": 0
+        },
+        {
+            "id": 8,
+            "is_solid": false
+        },
+        {
+            "id": 9,
+            "is_solid": false
+        },
+        {
+            "id": 10,
+            "is_solid": false
+        },
+        {
+            "id": 11,
+            "is_solid": false
+        },
+        {
+            "id": 12,
+            "is_solid": true
+        },
+        {
+            "id": 13,
+            "is_solid": true
+        },
+        {
+            "id": 14,
+            "is_solid": true
+        },
+        {
+            "id": 15,
+            "is_solid": true
+        },
+        {
+            "id": 16,
+            "is_solid": true
+        },
+        {
+            "id": 17,
+            "is_solid": true
+        },
+        {
+            "id": 18,
+            "is_solid": true
+        },
+        {
+            "id": 19,
+            "is_solid": true
+        },
+        {
+            "id": 20,
+            "is_solid": true
+        }
+    ]
+}
