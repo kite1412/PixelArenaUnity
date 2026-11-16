@@ -1,10 +1,11 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AttackController))]
 public class PlayerController : MonoBehaviour
 {
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private AttackController attackController;
     private Vector2 movement;
 
     private void Awake()
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        attackController = GetComponent<AttackController>();
     }
 
     private void Update()
@@ -52,11 +55,22 @@ public class PlayerController : MonoBehaviour
             ? 1.5f 
             : 1f);
 
+        OnAttack(keyboard.spaceKey);
+
         animator.SetBool(IsMovingHash, movement.sqrMagnitude > 0f);
     }
 
     private void FixedUpdate()
     {
         rb.linearVelocity = movement * moveSpeed;
+    }
+
+    private void OnAttack(KeyControl value)
+    {
+        if (value.isPressed)
+        {
+            Vector2 attackDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
+            attackController.ExecuteAttack(attackDirection);
+        }
     }
 }
