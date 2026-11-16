@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float moveSpeed = 1.5f;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -47,7 +47,10 @@ public class PlayerController : MonoBehaviour
         else if (movement.x < 0)
             spriteRenderer.flipX = true;
 
-        movement = movement.normalized;
+        movement = movement.normalized * (
+            keyboard != null && keyboard.leftShiftKey.isPressed 
+            ? 1.5f 
+            : 1f);
 
         animator.SetBool(IsMovingHash, movement.sqrMagnitude > 0f);
     }
