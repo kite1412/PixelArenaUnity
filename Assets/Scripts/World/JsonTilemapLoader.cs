@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -69,6 +70,8 @@ public class JsonTilemapLoader : MonoBehaviour
         {
             tilesetMetadata = JsonUtility.FromJson<TilesetMetadata>(tilesetMetadataJson.text);
             backgroundTilemap.ClearAllTiles(); 
+
+            tilemap.AddComponent<TilemapCollider2D>();
         });
 
         for (int y = 0; y < mapData.height; y++)
@@ -85,11 +88,18 @@ public class JsonTilemapLoader : MonoBehaviour
                     OnMetadataAvailable(() =>
                     {
                         TileMetadata tileMetadata = Array.Find(tilesetMetadata.tiles, t => t.id == tileIndex);
-                        if (tileMetadata != null && tileMetadata.BaseTileId >= 0 && tileMetadata.BaseTileId < tileSprites.Length)
+                        if (tileMetadata != null)
                         {
-                            Tile baseTile = ScriptableObject.CreateInstance<Tile>();
-                            baseTile.sprite = tileSprites[tileMetadata.BaseTileId];
-                            backgroundTilemap.SetTile(new Vector3Int(x, -y, 0), baseTile);
+                            if (tileMetadata.BaseTileId >= 0 && tileMetadata.BaseTileId < tileSprites.Length)
+                            {
+                                Tile baseTile = ScriptableObject.CreateInstance<Tile>();
+                                baseTile.sprite = tileSprites[tileMetadata.BaseTileId];
+                                backgroundTilemap.SetTile(new Vector3Int(x, -y, 0), baseTile);   
+                            }
+
+                            tile.colliderType = tileMetadata.IsSolid 
+                                ? Tile.ColliderType.Grid 
+                                : Tile.ColliderType.None;
                         }
                     });
 
