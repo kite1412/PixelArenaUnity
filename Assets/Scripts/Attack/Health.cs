@@ -12,6 +12,7 @@ public class Health : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Debug.Log($"{gameObject.name} has been destroyed.");
             Destroy(gameObject);
         }
     }

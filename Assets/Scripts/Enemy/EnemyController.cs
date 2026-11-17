@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(AttackController))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class EnemyController : MonoBehaviour
 {
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
@@ -13,6 +14,7 @@ public class EnemyController : MonoBehaviour
     private AttackController attackController;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
     public Vector2 targetPosition;
     public Action<EnemyController> OnDeath;
 
@@ -21,6 +23,12 @@ public class EnemyController : MonoBehaviour
         attackController = GetComponent<AttackController>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+    }
+
+    private void Start()
+    {
+        boxCollider.size = new Vector2(enemyData.width, enemyData.height);
     }
 
     private void Update()
