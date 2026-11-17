@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 {
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
     [SerializeField] private EnemyData enemyData;
+    [SerializeField] private float stoppingDistance = 1f;
 
     private AttackController attackController;
     private Animator animator;
@@ -22,30 +23,36 @@ public class EnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         if (targetPosition == null)
-            return;
+        return;
 
         Vector2 currentPosition = transform.position;
 
-        transform.position = Vector2.MoveTowards(
+        float distance = Vector2.Distance(
             currentPosition,
-            targetPosition,
-            enemyData.speed * Time.deltaTime
+            targetPosition
         );
+
+        bool shouldMove = distance > stoppingDistance;
+
+        if (shouldMove)
+            transform.position = Vector2.MoveTowards(
+                currentPosition,
+                targetPosition,
+                Mathf.Min(
+                    enemyData.speed * Time.deltaTime,
+                    distance - stoppingDistance
+                )
+            );
 
         if (targetPosition.x > currentPosition.x)
             spriteRenderer.flipX = false;
         else if (targetPosition.x < currentPosition.x)
             spriteRenderer.flipX = true;
 
-        animator.SetBool(IsMovingHash, (Vector2)transform.position != targetPosition);
+        animator.SetBool(IsMovingHash, shouldMove);
     }
 
     private void OnDestroy()
