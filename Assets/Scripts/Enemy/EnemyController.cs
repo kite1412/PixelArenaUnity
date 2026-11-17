@@ -28,7 +28,12 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        boxCollider.size = new Vector2(enemyData.width, enemyData.height);
+        float ppu = spriteRenderer.sprite.pixelsPerUnit;
+
+        boxCollider.size = new Vector2(
+            enemyData.width / ppu,
+            enemyData.height / ppu
+        );
     }
 
     private void Update()
