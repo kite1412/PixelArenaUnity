@@ -45,10 +45,11 @@ public class PlayerController : MonoBehaviour
             if (keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed)
                 movement.y -= 1f;
         }
-        if (movement.x > 0)
-            spriteRenderer.flipX = false;
-        else if (movement.x < 0)
-            spriteRenderer.flipX = true;
+        if (!GameManager.Instance.IsPaused)
+            if (movement.x > 0)
+                spriteRenderer.flipX = false;
+            else if (movement.x < 0)
+                spriteRenderer.flipX = true;
 
         movement = movement.normalized * (
             keyboard != null && keyboard.leftShiftKey.isPressed 

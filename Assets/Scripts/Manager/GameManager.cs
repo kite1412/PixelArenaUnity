@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int Score { get; private set; }
+    public bool IsPaused => Time.timeScale == 0f;
 
     public event Action<int> OnScoreChanged;
     public event Action<bool> OnPauseStateChanged;
