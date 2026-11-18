@@ -5,10 +5,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public int Score { get; private set; }
+    public int PlayerHealth { get; private set; } = 100;
     public bool IsPaused => Time.timeScale == 0f;
 
     public event Action<int> OnScoreChanged;
     public event Action<bool> OnPauseStateChanged;
+    public event Action<int> OnPlayerHealthChanged;
 
     private void Awake()
     {
@@ -37,5 +39,11 @@ public class GameManager : MonoBehaviour
     {
         Score += points;
         OnScoreChanged?.Invoke(Score);
+    }
+
+    public void SetPlayerHealth(int health)
+    {
+        PlayerHealth = health;
+        OnPlayerHealthChanged?.Invoke(PlayerHealth);
     }
 }

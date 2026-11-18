@@ -1,24 +1,29 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
 
-    private int currentHealth;
+    public int CurrentHealth { get; private set; }
+
+    public event Action<int> OnHealthChanged;
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        CurrentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             Debug.Log($"{gameObject.name} has been destroyed.");
             Destroy(gameObject);
         }
+        else
+            OnHealthChanged?.Invoke(CurrentHealth);
     }
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 }

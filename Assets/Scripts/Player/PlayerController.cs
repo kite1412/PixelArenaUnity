@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.Controls;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(AttackController))]
+[RequireComponent(typeof(Health))]
 public class PlayerController : MonoBehaviour
 {
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
@@ -15,18 +16,27 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private AttackController attackController;
+    private Health health;
     private Vector2 movement;
     private Vector2 lastMovementDirection;
 
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         attackController = GetComponent<AttackController>();
+        health = GetComponent<Health>();
     }
 
-    private void Update()
+    void Start()
+    {
+        health.OnHealthChanged += OnHealthChanged;
+        OnHealthChanged(health.CurrentHealth);
+        Debug.Log($"Player health initialized to {health.CurrentHealth}");
+    }
+
+    void Update()
     {
         movement = Vector2.zero;
 
@@ -68,7 +78,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool(IsMovingHash, hasMovement);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         rb.linearVelocity = movement * moveSpeed;
     }
@@ -77,5 +87,10 @@ public class PlayerController : MonoBehaviour
     {
         if (value.isPressed)
             attackController.ExecuteAttack(direction);
+    }
+
+    private void OnHealthChanged(int currentHealth)
+    {
+        GameManager.Instance.SetPlayerHealth(currentHealth);
     }
 }
