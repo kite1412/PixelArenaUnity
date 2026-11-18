@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private AttackController attackController;
     private Vector2 movement;
+    private Vector2 lastMovementDirection;
 
     private void Awake()
     {
@@ -56,9 +57,15 @@ public class PlayerController : MonoBehaviour
             ? 1.5f 
             : 1f);
 
-        OnAttack(keyboard.spaceKey);
+        bool hasMovement = movement.sqrMagnitude > 0f;
 
-        animator.SetBool(IsMovingHash, movement.sqrMagnitude > 0f);
+        if (hasMovement)
+            lastMovementDirection = movement.normalized;
+
+        if (keyboard != null)
+            OnAttack(keyboard.spaceKey, lastMovementDirection);
+
+        animator.SetBool(IsMovingHash, hasMovement);
     }
 
     private void FixedUpdate()
@@ -66,12 +73,9 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = movement * moveSpeed;
     }
 
-    private void OnAttack(KeyControl value)
+    private void OnAttack(KeyControl value, Vector2 direction)
     {
         if (value.isPressed)
-        {
-            Vector2 attackDirection = spriteRenderer.flipX ? Vector2.left : Vector2.right;
-            attackController.ExecuteAttack(attackDirection);
-        }
+            attackController.ExecuteAttack(direction);
     }
 }
