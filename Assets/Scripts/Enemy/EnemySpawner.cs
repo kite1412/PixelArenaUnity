@@ -90,6 +90,7 @@ public class EnemySpawner : MonoBehaviour
     private void OnEnemyDeath(EnemyController enemyController)
     {
         spawnedEnemies.Remove(enemyController);
+        GameManager.Instance.AddScore(1);
 
         enemyController.OnDeath -= OnEnemyDeath;
     }
