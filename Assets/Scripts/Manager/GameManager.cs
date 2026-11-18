@@ -4,10 +4,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public bool IsPaused { get; private set; }
     public int Score { get; private set; }
 
     public event Action<int> OnScoreChanged;
+    public event Action<bool> OnPauseStateChanged;
 
     private void Awake()
     {
@@ -23,13 +23,13 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0f;
-        IsPaused = true;
+        OnPauseStateChanged?.Invoke(true);
     }
 
     public void Resume()
     {
         Time.timeScale = 1f;
-        IsPaused = false;
+        OnPauseStateChanged?.Invoke(false);
     }
 
     public void AddScore(int points)
