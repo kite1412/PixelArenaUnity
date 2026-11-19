@@ -295,6 +295,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -190.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1405021276}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825121879487768665, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9081839936367338998, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1623,8 +1651,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUI
   scoreText: {fileID: 1168187754}
-  pauseMenu: {fileID: 1656258650}
   healthBarFill: {fileID: 425019956}
+  pauseMenu: {fileID: 1656258650}
+  gameOverMenu: {fileID: 1079317729}
 --- !u!4 &714301156
 Transform:
   m_ObjectHideFlags: 0
@@ -1771,6 +1800,11 @@ Transform:
   - {fileID: 503938624}
   m_Father: {fileID: 1349565749}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1079317729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4047381822530584391, guid: 1eafa8c707cfa4c8b9bbd3503485a55c, type: 3}
+  m_PrefabInstance: {fileID: 167916528}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1090684703
 GameObject:
   m_ObjectHideFlags: 0

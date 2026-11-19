@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class GameUI : MonoBehaviour
 {
     [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private Image healthBarFill;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject gameOverMenu;
 
     void Start()
     {
@@ -14,6 +15,7 @@ public class GameUI : MonoBehaviour
         GameManager.Instance.OnScoreChanged += UpdateScore;
         GameManager.Instance.OnPauseStateChanged += TogglePauseMenu;
         GameManager.Instance.OnPlayerHealthChanged += OnPlayerHealthChanged;
+        GameManager.Instance.OnGameOver += ShowGameOverMenu;
     }
 
     public void UpdateScore(int score)
@@ -30,5 +32,12 @@ public class GameUI : MonoBehaviour
     {
         healthBarFill.rectTransform.offsetMax = 
             new Vector2(-Mathf.Clamp(100 - health, 1, 100), healthBarFill.rectTransform.offsetMax.y);
+    }
+
+    public void ShowGameOverMenu()
+    {
+        gameOverMenu.transform.Find("FinalScore").GetComponent<TMP_Text>().text = 
+            "Final Score: " + GameManager.Instance.Score.ToString();
+        gameOverMenu.SetActive(true);
     }
 }
