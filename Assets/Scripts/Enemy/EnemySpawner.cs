@@ -23,15 +23,18 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Time.time >= nextSpawnTime)
+        if (target != null && !GameManager.Instance.IsGameOver)
         {
-            SpawnEnemy();
-            nextSpawnTime = Time.time + spawnIntervalSeconds;
-        }
+            if (Time.time >= nextSpawnTime)
+            {
+                SpawnEnemy();
+                nextSpawnTime = Time.time + spawnIntervalSeconds;
+            }
 
-        foreach (EnemyController enemy in spawnedEnemies)
-            if (enemy != null)
-                enemy.targetPosition = target.position;
+            foreach (EnemyController enemy in spawnedEnemies)
+                if (enemy != null)
+                    enemy.targetPosition = target.position;
+        }
     }
 
     private void SpawnEnemy()

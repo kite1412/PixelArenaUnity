@@ -9,12 +9,12 @@ public class EnemyController : MonoBehaviour
 {
     private static readonly int IsMovingHash = Animator.StringToHash("isMoving");
     [SerializeField] private EnemyData enemyData;
-    [SerializeField] private float stoppingDistance = 1f;
 
     private AttackController attackController;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
+    private float stoppingDistance;
     private float nextAttackTime = 0f;
     private Vector2 lastMovementDirection;
     public Vector2 targetPosition;
@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
+        stoppingDistance = Mathf.Max(0, attackController.attack.range - 0.5f);
     }
 
     void Start()
@@ -40,7 +41,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (targetPosition == null)
+        if (targetPosition == null || GameManager.Instance.IsGameOver)
         return;
 
         Vector2 currentPosition = transform.position;

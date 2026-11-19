@@ -83,6 +83,12 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = movement * moveSpeed;
     }
 
+    void OnDestroy()
+    {
+        GameManager.Instance.SetPlayerHealth(0);
+        GameManager.Instance.GameOver();
+    }
+
     private void OnAttack(KeyControl value, Vector2 direction)
     {
         if (value.isPressed)
