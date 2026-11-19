@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
-    [SerializeField] private AttackData attack;
+    public AttackData attack;
     [SerializeField] private LayerMask targetLayer;
 
     private float nextAttackTime;
@@ -29,6 +29,7 @@ public class AttackController : MonoBehaviour
         {
             if (target.TryGetComponent(out Health health))
             {
+                Debug.Log($"Target: {target.name} hit for {attack.damage} damage.");
                 health.TakeDamage(attack.damage);
             }
         }

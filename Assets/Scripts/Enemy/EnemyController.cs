@@ -15,10 +15,12 @@ public class EnemyController : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
+    private float nextAttackTime = 0f;
+    private Vector2 lastMovementDirection;
     public Vector2 targetPosition;
     public Action<EnemyController> OnDeath;
 
-    private void Awake()
+    void Awake()
     {
         attackController = GetComponent<AttackController>();
         animator = GetComponent<Animator>();
@@ -26,7 +28,7 @@ public class EnemyController : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
-    private void Start()
+    void Start()
     {
         float ppu = spriteRenderer.sprite.pixelsPerUnit;
 
@@ -36,7 +38,7 @@ public class EnemyController : MonoBehaviour
         );
     }
 
-    private void Update()
+    void Update()
     {
         if (targetPosition == null)
         return;
@@ -51,7 +53,9 @@ public class EnemyController : MonoBehaviour
         bool shouldMove = distance > stoppingDistance;
 
         if (shouldMove)
-            transform.position = Vector2.MoveTowards(
+        {
+            nextAttackTime = 0f;
+            lastMovementDirection = Vector2.MoveTowards(
                 currentPosition,
                 targetPosition,
                 Mathf.Min(
@@ -59,6 +63,23 @@ public class EnemyController : MonoBehaviour
                     distance - stoppingDistance
                 )
             );
+
+            transform.position = lastMovementDirection;
+        }
+        else
+        {
+            if (nextAttackTime != 0f)
+            {
+                if (Time.time >= nextAttackTime)
+                {
+                    Vector2 direction = lastMovementDirection.normalized;
+                    attackController.ExecuteAttack(direction);
+                    nextAttackTime = Time.time + attackController.attack.cooldown;
+                }
+            }
+            else
+                nextAttackTime = Time.time + attackController.attack.cooldown;
+        }
 
         if (targetPosition.x > currentPosition.x)
             spriteRenderer.flipX = false;
@@ -68,7 +89,7 @@ public class EnemyController : MonoBehaviour
         animator.SetBool(IsMovingHash, shouldMove);
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         OnDeath?.Invoke(this);
     }
